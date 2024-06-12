@@ -39,3 +39,11 @@ reserved = {"as": "AS",
             "while": "WHILE"
              }
 
+tokens = (
+    "INTEGER",
+    "FLOAT",
+    "CHAR",
+    "BOOL",
+    "CPOINTER",
+    "REFERENCE",
+)+tuple(reserved.values())
