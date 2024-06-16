@@ -54,6 +54,10 @@ tokens = (
     'LPAREN',
     'RPAREN',
     'MOD',
+    'COMMA',
+    'SEMICOLON',
+    'PERIOD',
+    'COLON',
     'EQUALS',
     'NOT_EQUALS',
     'LESSER',
@@ -79,6 +83,10 @@ t_DIVIDE  = r'\/'
 t_MOD     = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
+t_COMMA   = r','
+t_SEMICOLON = r';'
+t_PERIOD  = r'\.'
+t_COLON   = r':'
 
 # Operadores de comparación
 t_EQUALS     = r'=='
@@ -153,27 +161,27 @@ use std::io::Write;
 
 fn main() { 
 
-    // Número fijo de entradas que el usuario debe proporcionar 
+    // Numero fijo de entradas que el usuario debe proporcionar 
 
     const NUM_ENTRADAS: usize = 5; 
 
   
 
-    // Declaración de un vector para almacenar los números 
+    // Declaracion de un vector para almacenar los numeros 
 
     let mut numeros: Vec<i32> = Vec::new(); 
 
   
 
-    println!("Introduce {} números enteros:", NUM_ENTRADAS); 
+    println!("Introduce {} numeros enteros:", NUM_ENTRADAS); 
 
   
 
-    // Leer números del usuario 
+    // Leer numeros del usuario 
 
     for _ in 0..NUM_ENTRADAS { 
 
-        print!("Número: "); 
+        print!("Numero: "); 
 
         io::stdout().flush().unwrap(); // Asegura que el mensaje se imprima antes de leer la entrada 
 
@@ -189,17 +197,17 @@ fn main() {
 
   
 
-        // Intentar convertir la entrada en un número entero 
+        // Intentar convertir la entrada en un numero entero 
 
         match entrada.parse::<i32>() { 
 
-            Ok(numero) => numeros.push(numero), // Agregar el número al vector si la conversión es exitosa 
+            Ok(numero) => numeros.push(numero), // Agregar el numero al vector si la conversion es exitosa 
 
             Err(_) => { 
 
-                println!("Por favor, introduce un número entero válido."); 
+                println!("Por favor, introduce un numero entero válido."); 
 
-                return; // Termina el programa si la entrada no es válida 
+                return; // Termina el programa si la entrada no es valida 
 
             } 
 
@@ -209,7 +217,7 @@ fn main() {
 
   
 
-    // Calcular la suma y el promedio de los números 
+    // Calcular la suma y el promedio de los numeros 
 
     let suma: i32 = numeros.iter().sum(); 
 
