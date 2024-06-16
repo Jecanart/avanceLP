@@ -1,3 +1,5 @@
 # avanceLP
-Usuarios: 
-John Cañarte: Jecanart/SolinalDev(bug de git)
+Usuarios:
+
+
+John Cañarte: Jecanart/SolinalDev (bug de git)
