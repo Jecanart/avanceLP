@@ -63,25 +63,30 @@ t_DIVIDE  = r'/'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 
-#Definicion token INTEGER John Cañarte
-def t_INTEGER(t):
-    r'\d+'
-    t.value = int(t.value)    
-    return t
 
 def t_VARIABLE(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value,'VARIABLE')
     return t 
 
+def t_INTEGER(t):
+    r'\d+'
+    t.value = int(t.value)    
+    return t
+
 def t_FLOAT(t):
     r'[-]?[0-9]*\.[0-9]*'
     t.value = float(t.value)
     return t
 
+def t_BOOL(t):
+    r'(true|false)'
+    t.value = bool(t.value)
+    return t
+
 lexer = lex.lex()
 
-data = "12"
+data = "true"
 
 lexer.input(data)
 
