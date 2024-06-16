@@ -53,15 +53,54 @@ tokens = (
     'DIVIDE',
     'LPAREN',
     'RPAREN',
+    'MOD',
+    'EQUALS',
+    'NOT_EQUALS',
+    'LESSER',
+    'GREATER',
+    'LESSER_EQ',
+    'GREATER_EQ',
+    'ASSIGN',
+    'PLUS_ASSIGN',
+    'MINUS_ASSIGN',
+    'TIMES_ASSIGN',
+    'DIVIDE_ASSIGN',
+    'MOD_ASSIGN',
+    'AND',
+    'OR',
+    'NOT'
 )+tuple(reserved.values())
 
 #Tokens generales
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
 t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
+t_DIVIDE  = r'\/'
+t_MOD     = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
+
+# Operadores de comparación
+t_EQUALS     = r'=='
+t_NOT_EQUALS = r'!='
+t_LESSER     = r'<'
+t_GREATER    = r'>'
+t_LESSER_EQ  = r'<='
+t_GREATER_EQ = r'>='
+
+# Operadores de asignación
+t_ASSIGN         = r'='
+t_PLUS_ASSIGN    = r'\+='
+t_MINUS_ASSIGN   = r'-='
+t_TIMES_ASSIGN   = r'\*='
+t_DIVIDE_ASSIGN  = r'\/='
+t_MOD_ASSIGN     = r'%='
+
+# Operadores lógicos
+t_AND      = r'&&'
+t_OR       = r'\|\|'
+t_NOT      = r'!'
+
 
 
 def t_VARIABLE(t):
