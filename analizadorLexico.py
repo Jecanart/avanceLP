@@ -123,12 +123,6 @@ def t_BOOL(t):
     t.value = bool(t.value)
     return t
 
-lexer = lex.lex()
-
-data = "true"
-
-lexer.input(data)
-
 
 
 #Reglas generales
@@ -147,6 +141,98 @@ t_ignore  = ' \t'
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+lexer = lex.lex()
+
+algoritmo_Torres = """
+use std::io; 
+
+use std::io::Write; 
+
+  
+
+fn main() { 
+
+    // Número fijo de entradas que el usuario debe proporcionar 
+
+    const NUM_ENTRADAS: usize = 5; 
+
+  
+
+    // Declaración de un vector para almacenar los números 
+
+    let mut numeros: Vec<i32> = Vec::new(); 
+
+  
+
+    println!("Introduce {} números enteros:", NUM_ENTRADAS); 
+
+  
+
+    // Leer números del usuario 
+
+    for _ in 0..NUM_ENTRADAS { 
+
+        print!("Número: "); 
+
+        io::stdout().flush().unwrap(); // Asegura que el mensaje se imprima antes de leer la entrada 
+
+  
+
+        let mut entrada = String::new(); 
+
+        io::stdin().read_line(&mut entrada).expect("Error al leer la línea"); 
+
+  
+
+        let entrada = entrada.trim(); // Elimina espacios en blanco al principio y al final 
+
+  
+
+        // Intentar convertir la entrada en un número entero 
+
+        match entrada.parse::<i32>() { 
+
+            Ok(numero) => numeros.push(numero), // Agregar el número al vector si la conversión es exitosa 
+
+            Err(_) => { 
+
+                println!("Por favor, introduce un número entero válido."); 
+
+                return; // Termina el programa si la entrada no es válida 
+
+            } 
+
+        } 
+
+    } 
+
+  
+
+    // Calcular la suma y el promedio de los números 
+
+    let suma: i32 = numeros.iter().sum(); 
+
+    let conteo: usize = numeros.len(); 
+
+    let promedio: f64 = suma as f64 / conteo as f64; 
+
+  
+
+    // Mostrar los resultados 
+
+    println!("Suma: {}", suma); 
+
+    println!("Conteo: {}", conteo); 
+
+    println!("Promedio: {:.2}", promedio); 
+
+} 
+"""
+
+lexer.input(algoritmo_Torres)
+
+
 
 # Tokenize
 
