@@ -46,7 +46,22 @@ tokens = (
     "BOOL",
     "CPOINTER",
     "REFERENCE",
+    'NUMBER',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'LPAREN',
+    'RPAREN',
 )+tuple(reserved.values())
+
+#Tokens generales
+t_PLUS    = r'\+'
+t_MINUS   = r'-'
+t_TIMES   = r'\*'
+t_DIVIDE  = r'/'
+t_LPAREN  = r'\('
+t_RPAREN  = r'\)'
 
 #Definicion token INTEGER John Cañarte
 def t_INTEGER(t):
