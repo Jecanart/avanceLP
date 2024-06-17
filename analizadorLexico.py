@@ -36,7 +36,8 @@ reserved = {"as": "AS",
             "unsafe" : "UNSAFE",
             "use" : "USE",
             "where" : "WHERE",
-            "while": "WHILE"
+            "while": "WHILE",
+            "string":"STRING"
              }
 
 tokens = (
@@ -72,7 +73,9 @@ tokens = (
     'MOD_ASSIGN',
     'AND',
     'OR',
-    'NOT'
+    'NOT',
+    "COMMENT"
+    "MULTILINE_COMMENT"
 )+tuple(reserved.values())
 
 #Tokens generales
@@ -130,6 +133,20 @@ def t_BOOL(t):
     r'(true|false)'
     t.value = bool(t.value)
     return t
+
+def t_STRING(t):
+    r'"([^\\\n]|(\\.))*?"'
+    t.value = bool(t.value)
+    return t
+
+#los comentarios deben ser ignorados
+def t_COMMENT(t):
+    r'//.*'
+    pass  
+
+def t_MULTILINE_COMMENT(t):
+    r'/\*([^*]|\*+[^*/])*\*+/'
+    pass  
 
 
 
