@@ -20,7 +20,6 @@ reserved = {"as": "AS",
             "let" : "LET",
             "loop" : "LOOP",
             "match" : "MATCH",
-            "mod" : "MOD",
             "move" : "MOVE",
             "mut" : "MUT",
             "pub" : "PUB",
@@ -123,6 +122,7 @@ def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)    
     return t
+
 
 def t_FLOAT(t):
     r'[-]?[0-9]*\.[0-9]*'
@@ -251,6 +251,64 @@ fn main() {
     println!("Conteo: {}", conteo); 
 
     println!("Promedio: {:.2}", promedio); 
+
+} 
+"""
+
+algoritmo_Canarte = """
+use std::io; // Importa el módulo std::io para manejar la entrada y salida estándar 
+
+  
+
+fn main() { 
+
+    println!("Calculadora de área de triángulo"); 
+
+  
+
+    // Solicitar la base del triángulo al usuario 
+
+    println!("Ingrese la base del triángulo:"); 
+
+    let mut entrada_base = String::new(); // Crear una nueva cadena vacía 
+
+    io::stdin().read_line(&mut entrada_base).expect("Error al leer la entrada"); // Leer la entrada del usuario 
+
+    let base: f64 = entrada_base.trim().parse().expect("Por favor ingrese un número válido"); // Convertir la entrada a un número de coma flotante 
+
+  
+
+    // Solicitar la altura del triángulo al usuario 
+
+    println!("Ingrese la altura del triángulo:"); 
+
+    let mut entrada_altura = String::new(); // Crear una nueva cadena vacía 
+
+    io::stdin().read_line(&mut entrada_altura).expect("Error al leer la entrada"); // Leer la entrada del usuario 
+
+    let altura: f64 = entrada_altura.trim().parse().expect("Por favor ingrese un número válido"); // Convertir la entrada a un número de coma flotante 
+
+  
+
+    // Calcular el área del triángulo 
+
+    let area = calcular_area_triangulo(base, altura); 
+
+  
+
+    // Mostrar el resultado 
+
+    println!("El área del triángulo con base {} y altura {} es: {}", base, altura, area); 
+
+} 
+
+  
+
+// Función para calcular el área del triángulo 
+
+fn calcular_area_triangulo(base: f64, altura: f64) -> f64 { 
+
+    (base * altura) / 2.0  
 
 } 
 """
