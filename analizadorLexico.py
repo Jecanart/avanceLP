@@ -1,4 +1,5 @@
 import ply.lex as lex
+from datetime import datetime
 
 reserved = {"as": "AS",
             "async" : "ASYNC",
@@ -365,13 +366,19 @@ fn determinar_tipo_triangulo(lado1: f64, lado2: f64, lado3: f64) -> &'static str
 }
 """
 
-lexer.input('-3.44')
+def logOutput(user, a_input):
+    lexer.input(a_input)
+    datime = datetime.now()
+    timeStamp = datime.strftime("%d%m%Y-%Hh%M")
+    dirString = "logs/lexico-"+user+"-"+timeStamp+".txt"
+    f = open(dirString, "w")
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break    
+        linea = str(tok) 
+        f.write(linea+"\n")
+
+logOutput("Jecanart", algoritmo_Canarte)
 
 
-# Tokenize
-
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break    
-    print(tok)
