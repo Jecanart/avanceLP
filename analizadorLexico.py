@@ -52,6 +52,8 @@ tokens = (
     'TIMES',
     'DIVIDE',
     'LPAREN',
+    'LLLAVE',
+    'RLLAVE',
     'RPAREN',
     'MOD',
     'COMMA',
@@ -85,6 +87,8 @@ t_DIVIDE  = r'\/'
 t_MOD     = r'%'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
+t_LLLAVE = r'\{'
+t_RLLAVE = r'\}'
 t_COMMA   = r','
 t_SEMICOLON = r';'
 t_PERIOD  = r'\.'
@@ -118,15 +122,14 @@ def t_VARIABLE(t):
     t.type = reserved.get(t.value,'VARIABLE')
     return t 
 
+def t_FLOAT(t):
+    r'(\d+\.\d*|\d*\.\d+)'
+    t.value = float(t.value)
+    return t
+
 def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)    
-    return t
-
-
-def t_FLOAT(t):
-    r'[-]?[0-9]*\.[0-9]*'
-    t.value = float(t.value)
     return t
 
 def t_BOOL(t):
@@ -362,7 +365,7 @@ fn determinar_tipo_triangulo(lado1: f64, lado2: f64, lado3: f64) -> &'static str
 }
 """
 
-lexer.input(algoritmo_Torres)
+lexer.input('-3.44')
 
 
 # Tokenize
