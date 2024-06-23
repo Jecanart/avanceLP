@@ -37,10 +37,13 @@ reserved = {"as": "AS",
             "use" : "USE",
             "where" : "WHERE",
             "while": "WHILE",
-            "string":"STRING"
+            "string":"STRING",
+            "println":"PRINTLN"
              }
 
 tokens = (
+    "PRINTSTRING",
+    "VARIABLE",
     "FLOAT",
     "INTEGER",
     "CHAR",
@@ -76,8 +79,8 @@ tokens = (
     'AND',
     'OR',
     'NOT',
-    "COMMENT"
-    "MULTILINE_COMMENT"
+    "COMMENT",
+    "MULTILINE_COMMENT",
 )+tuple(reserved.values())
 
 #Tokens generales
@@ -138,6 +141,9 @@ def t_BOOL(t):
     t.value = bool(t.value)
     return t
 
+def t_PRINTSTRING(t):
+    r'"([^\\\n]|(\\.))*?{([a-zA-Z_][a-zA-Z0-9_]*)*}+([^\\\n]|(\\.))*?"'
+
 def t_STRING(t):
     r'"([^\\\n]|(\\.))*?"'
     t.value = bool(t.value)
@@ -151,6 +157,7 @@ def t_COMMENT(t):
 def t_MULTILINE_COMMENT(t):
     r'/\*([^*]|\*+[^*/])*\*+/'
     pass  
+
 
 
 
@@ -379,6 +386,6 @@ def logOutput(user, a_input):
         linea = str(tok) 
         f.write(linea+"\n")
 
-logOutput("Jecanart", algoritmo_Canarte)
+#logOutput("Jecanart", algoritmo_Canarte)
 
 
