@@ -4,7 +4,16 @@ from analizadorLexico import tokens, algoritmo_Canarte, algoritmo_Macias, algori
 
 def p_cuerpo(p):
     '''cuerpo : expresion
-              | println'''
+              | println
+              | ifStatement
+              | ifElseStatement'''
+    
+def p_emptyLine(p):
+    ''
+
+def p_empty(p):
+    'empty :'
+    pass
 
 def p_expresion(p):
     'expresion : number operator number'
@@ -20,9 +29,13 @@ def p_operator(p):
                 | DIVIDE
                 | MOD'''
 
-def p_println(p):
-    '''println : PRINTLN NOT LPAREN RPAREN
-                | PRINTLN NOT LPAREN STRING RPAREN'''
+def p_compOperator(p):
+    '''compOperator : EQUALS
+                    | NOT_EQUALS
+                    | LESSER
+                    | GREATER
+                    | LESSER_EQ
+                    | GREATER_EQ'''
 
 def p_value(p):
     '''value : VARIABLE
@@ -33,8 +46,27 @@ def p_values(p):
     '''values : value
             | value COMMA values'''
 
+def p_println(p):
+    '''println : PRINTLN NOT LPAREN RPAREN
+                | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
+
+def p_ifStatement(p):
+    'ifStatement : IF value compOperator value LLLAVE cuerpo RLLAVE SEMICOLON'
+
+def p_ifElseStatement(p):
+    'ifElseStatement : ifStatement elseStatement'
+
+def p_elseStatement(p):
+    '''elseStatement : ELSE LLLAVE cuerpo RLLAVE SEMICOLON
+                     | ELSE IF value compOperator value LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
+
+def p_coment(p):
+    'coment :  '
 
 
+
+
+algoritmoCanarte = open ("algoritmos/algoritmo_canarte.txt")
 
 
 # Error rule for syntax errors
@@ -44,6 +76,28 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
+def logOutput(user, algoritmo):
+    datime = datetime.now()
+    timeStamp = datime.strftime("%d%m%Y-%Hh%M")
+    dirString = "logs/sintactico-"+user+"-"+timeStamp+".txt"
+    f = open(dirString, "w")
+    for line in algoritmo:
+        try:
+            sentence = line.strip()
+            sentence = sentence.strip("\n")
+            s = sentence
+        except EOFError:
+            break
+        if not s: continue
+        result = parser.parse(s)
+        f.write(sentence + '\n')
+        if(str(result) == 'none\n'):
+            f.write(str(result))
+        else:
+            f.write('Syntax error in input!\n')
+       
+
+#logOutput('jecanart', algoritmoCanarte)
 while True:
     try:
         s = input('')

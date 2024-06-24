@@ -1,0 +1,62 @@
+use std::io; 
+
+  
+
+fn main() { 
+
+    println!("Calculadora de area de triangulo"); 
+
+  
+
+    // Solicitar la base del triángulo al usuario 
+
+    println!("Ingrese la base del triángulo:"); 
+
+    // Crear una nueva cadena vacía 
+    let mut entrada_base = String::new(); 
+
+    // Leer la entrada del usuario 
+    io::stdin().read_line(&mut entrada_base).expect("Error al leer la entrada"); 
+
+    // Convertir la entrada a un número de coma flotante 
+    let base: f64 = entrada_base.trim().parse().expect("Por favor ingrese un número válido"); 
+
+  
+
+    // Solicitar la altura del triángulo al usuario 
+
+    println!("Ingrese la altura del triángulo:"); 
+
+    // Crear una nueva cadena vacía 
+
+    let mut entrada_altura = String::new(); 
+
+    // Leer la entrada del usuario 
+    io::stdin().read_line(&mut entrada_altura).expect("Error al leer la entrada"); 
+
+    // Convertir la entrada a un número de coma flotante 
+    let altura: f64 = entrada_altura.trim().parse().expect("Por favor ingrese un número válido"); 
+
+  
+
+    // Calcular el área del triángulo 
+
+    let area = calcular_area_triangulo(base, altura); 
+
+  
+
+    // Mostrar el resultado 
+
+    println!("El área del triángulo con base {} y altura {} es: {}", base, altura, area); 
+
+} 
+
+  
+
+// Función para calcular el área del triángulo 
+
+fn calcular_area_triangulo(base: f64, altura: f64) -> f64 { 
+
+    (base * altura) / 2.0  
+
+} 

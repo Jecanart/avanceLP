@@ -1,0 +1,56 @@
+use std::io;
+Syntax error in input!
+fn main() {
+Syntax error in input!
+println!("Calculadora de área de triángulo");
+Syntax error in input!
+// Solicitar la base del triángulo al usuario
+Syntax error in input!
+println!("Ingrese la base del triángulo:");
+Syntax error in input!
+// Crear una nueva cadena vacía
+Syntax error in input!
+let mut entrada_base = String::new();
+Syntax error in input!
+// Leer la entrada del usuario
+Syntax error in input!
+io::stdin().read_line(&mut entrada_base).expect("Error al leer la entrada");
+Syntax error in input!
+// Convertir la entrada a un número de coma flotante
+Syntax error in input!
+let base: f64 = entrada_base.trim().parse().expect("Por favor ingrese un número válido");
+Syntax error in input!
+// Solicitar la altura del triángulo al usuario
+Syntax error in input!
+println!("Ingrese la altura del triángulo:");
+Syntax error in input!
+// Crear una nueva cadena vacía
+Syntax error in input!
+let mut entrada_altura = String::new();
+Syntax error in input!
+// Leer la entrada del usuario
+Syntax error in input!
+io::stdin().read_line(&mut entrada_altura).expect("Error al leer la entrada");
+Syntax error in input!
+// Convertir la entrada a un número de coma flotante
+Syntax error in input!
+let altura: f64 = entrada_altura.trim().parse().expect("Por favor ingrese un número válido");
+Syntax error in input!
+// Calcular el área del triángulo
+Syntax error in input!
+let area = calcular_area_triangulo(base, altura);
+Syntax error in input!
+// Mostrar el resultado
+Syntax error in input!
+println!("El área del triángulo con base {} y altura {} es: {}", base, altura, area);
+Syntax error in input!
+}
+Syntax error in input!
+// Función para calcular el área del triángulo
+Syntax error in input!
+fn calcular_area_triangulo(base: f64, altura: f64) -> f64 {
+Syntax error in input!
+(base * altura) / 2.0
+Syntax error in input!
+}
+Syntax error in input!
