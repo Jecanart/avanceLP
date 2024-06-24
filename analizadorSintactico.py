@@ -6,10 +6,8 @@ def p_cuerpo(p):
     '''cuerpo : expresion
               | println
               | ifStatement
-              | ifElseStatement'''
-    
-def p_emptyLine(p):
-    ''
+              | ifElseStatement
+              | comment'''
 
 def p_empty(p):
     'empty :'
@@ -60,8 +58,8 @@ def p_elseStatement(p):
     '''elseStatement : ELSE LLLAVE cuerpo RLLAVE SEMICOLON
                      | ELSE IF value compOperator value LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
 
-def p_coment(p):
-    'coment :  '
+def p_comment(p):
+    'comment :  COMMENT'
 
 
 
