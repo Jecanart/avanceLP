@@ -1,6 +1,7 @@
 import ply.yacc as yacc
 from datetime import datetime
-from analizadorLexico import tokens, algoritmo_Canarte, algoritmo_Macias, algoritmo_Torres
+from analizadorLexico import tokens, algoritmo_Macias, algoritmo_Torres
+import sys
 
 def p_cuerpo(p):
     '''cuerpo : expresion
@@ -78,7 +79,7 @@ def logOutput(user, algoritmo):
     datime = datetime.now()
     timeStamp = datime.strftime("%d%m%Y-%Hh%M")
     dirString = "logs/sintactico-"+user+"-"+timeStamp+".txt"
-    f = open(dirString, "w")
+    sys.stdout = open(dirString, 'w')
     for line in algoritmo:
         try:
             sentence = line.strip()
@@ -86,21 +87,12 @@ def logOutput(user, algoritmo):
             s = sentence
         except EOFError:
             break
-        if not s: continue
+        if not s: 
+            continue
+        print(sentence)
         result = parser.parse(s)
-        f.write(sentence + '\n')
-        if(str(result) == 'none\n'):
-            f.write(str(result))
-        else:
-            f.write('Syntax error in input!\n')
+    sys.stdout.close()
+           
        
 
-#logOutput('jecanart', algoritmoCanarte)
-while True:
-    try:
-        s = input('')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+logOutput('jecanart', algoritmoCanarte)
