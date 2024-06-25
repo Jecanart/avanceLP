@@ -38,11 +38,11 @@ reserved = {"as": "AS",
             "where" : "WHERE",
             "while": "WHILE",
             "string":"STRING",
-            "println":"PRINTLN"
+            "println":"PRINTLN",
+            "new" : "NEW"
              }
 
 tokens = (
-    "PRINTSTRING",
     "VARIABLE",
     "FLOAT",
     "INTEGER",
@@ -58,6 +58,8 @@ tokens = (
     'LPAREN',
     'LLLAVE',
     'RLLAVE',
+    'LBRACKET',
+    'RBRACKET',
     'RPAREN',
     'MOD',
     'COMMA',
@@ -93,6 +95,8 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
 t_COMMA   = r','
 t_SEMICOLON = r';'
 t_PERIOD  = r'\.'
@@ -141,8 +145,8 @@ def t_BOOL(t):
     t.value = bool(t.value)
     return t
 
-def t_PRINTSTRING(t):
-    r'"([^\\\n]|(\\.))*?{([a-zA-Z_][a-zA-Z0-9_]*)*}+([^\\\n]|(\\.))*?"'
+#def t_PRINTSTRING(t):
+#    r'"([^\\\n]|(\\.))*?{([a-zA-Z_][a-zA-Z0-9_]*)*}+([^\\\n]|(\\.))*?"'
 
 def t_STRING(t):
     r'"([^\\\n]|(\\.))*?"'
@@ -151,7 +155,7 @@ def t_STRING(t):
 
 #los comentarios deben ser ignorados
 def t_COMMENT(t):
-    r'//.*'
+    r'\/\/.*'
     pass  
 
 def t_MULTILINE_COMMENT(t):

@@ -4,12 +4,16 @@ from analizadorLexico import tokens, algoritmo_Macias, algoritmo_Torres
 import sys
 
 def p_cuerpo(p):
-    '''cuerpo : expresion
+    '''cuerpo : expression
               | println
               | ifStatement
               | ifElseStatement
+              | varStatement
               | variable
-              | comment'''
+              | emptyString
+              | arrayStatement
+              | emptyFunctionSt
+              | voidFunctionSt'''
 
 def p_empty(p):
     'empty :'
@@ -21,12 +25,12 @@ def p_variable(p):
                 | logicexpression
     '''
 
-def p_expresion(p):
-    'expresion : number operator number'
+def p_expression(p):
+    'expression : number operator number'
 
 
-def p_logicexpresion(p):
-    'logicexpression: value compOperator value'
+def p_logicexpression(p):
+    'logicexpression : value compOperator value'
 
 
 def p_number(p):
@@ -61,6 +65,10 @@ def p_println(p):
     '''println : PRINTLN NOT LPAREN RPAREN
                 | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
 
+def p_varStatement(p):
+    '''varStatement : LET VARIABLE ASSIGN value SEMICOLON
+                    | LET MUT VARIABLE ASSIGN value SEMICOLON'''
+
 def p_ifStatement(p):
     'ifStatement : IF logicexpression LLLAVE cuerpo RLLAVE SEMICOLON'
 
@@ -71,8 +79,18 @@ def p_elseStatement(p):
     '''elseStatement : ELSE LLLAVE cuerpo RLLAVE SEMICOLON
                      | ELSE IF logicexpression LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
 
-def p_comment(p):
-    'comment :  COMMENT'
+def p_arrayStatementWOType(p):
+    'arrayStatement : LET VARIABLE ASSIGN LBRACKET values RBRACKET SEMICOLON'
+
+def p_emptyString(p):
+    '''emptyString : LET VARIABLE ASSIGN SEMICOLON SEMICOLON NEW LPAREN RPAREN SEMICOLON
+                   | LET MUT VARIABLE ASSIGN SEMICOLON SEMICOLON NEW LPAREN RPAREN SEMICOLON'''
+
+def p_emptyFunctionSt(p):
+    'emptyFunctionSt : FN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
+
+def p_voidFunctionSt(p):
+    'voidFunctionSt : FN VARIABLE LPAREN RPAREN LLLAVE cuerpo RLLAVE'
 
 
 
