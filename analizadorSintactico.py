@@ -98,6 +98,7 @@ def p_voidFunctionSt(p):
 
 algoritmoCanarte = open ("algoritmos/algoritmo_canarte.txt")
 algoritmoTorres = open ("algoritmos/algoritmo_torres.txt")
+algoritmoMacias = open ("algoritmos/algoritmo_macias.txt")
 
 # Error rule for syntax errors
 def p_error(p):
@@ -127,4 +128,5 @@ def logOutput(user, algoritmo):
        
 
 #logOutput('jecanart', algoritmoCanarte)
-logOutput('JoseTorres2210', algoritmoTorres)
+#logOutput('JoseTorres2210', algoritmoTorres)
+logOutput('Ghost04102002', algoritmoMacias)

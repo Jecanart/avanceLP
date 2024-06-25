@@ -1,0 +1,79 @@
+use std::io; // Importa el módulo std::io para manejar la entrada y salida estándar
+Syntax error in input!
+fn main() {
+Syntax error in input!
+println!("Identificador de tipo de triángulo");
+// Solicitar el primer lado del triángulo al usuario
+Syntax error in input!
+println!("Ingrese el primer lado del triángulo:");
+let lado1 = leer_entrada();
+Syntax error in input!
+// Solicitar el segundo lado del triángulo al usuario
+Syntax error in input!
+println!("Ingrese el segundo lado del triángulo:");
+let lado2 = leer_entrada();
+Syntax error in input!
+// Solicitar el tercer lado del triángulo al usuario
+Syntax error in input!
+println!("Ingrese el tercer lado del triángulo:");
+let lado3 = leer_entrada();
+Syntax error in input!
+// Determinar el tipo de triángulo
+Syntax error in input!
+let tipo = determinar_tipo_triangulo(lado1, lado2, lado3);
+Syntax error in input!
+// Mostrar el resultado
+Syntax error in input!
+println!(
+Syntax error in input!
+"El triángulo con lados {}, {}, {} es: {}",
+Syntax error in input!
+lado1, lado2, lado3, tipo
+Syntax error in input!
+);
+Syntax error in input!
+}
+Syntax error in input!
+// Función para leer y convertir la entrada del usuario a un número de coma flotante
+Syntax error in input!
+fn leer_entrada() -> f64 {
+Syntax error in input!
+let mut entrada = String::new(); // Crear una nueva cadena vacía
+Syntax error in input!
+io::stdin()
+Syntax error in input!
+.read_line(&mut entrada)
+Syntax error in input!
+Illegal character '&'
+.expect("Error al leer la entrada"); // Leer la entrada del usuario
+Syntax error in input!
+entrada.trim().parse().expect("Por favor ingrese un número válido") // Convertir la entrada a un número de coma flotante
+Syntax error in input!
+}
+Syntax error in input!
+// Función para determinar el tipo de triángulo
+Syntax error in input!
+fn determinar_tipo_triangulo(lado1: f64, lado2: f64, lado3: f64) -> &'static str {
+Syntax error in input!
+Illegal character '&'
+Illegal character '''
+if lado1 == lado2 && lado2 == lado3 {
+Syntax error in input!
+Syntax error in input!
+"Equilátero"
+Syntax error in input!
+} else if lado1 == lado2 || lado1 == lado3 || lado2 == lado3 {
+Syntax error in input!
+Syntax error in input!
+Syntax error in input!
+Syntax error in input!
+"Isósceles"
+Syntax error in input!
+} else {
+Syntax error in input!
+"Escaleno"
+Syntax error in input!
+}
+Syntax error in input!
+}
+Syntax error in input!

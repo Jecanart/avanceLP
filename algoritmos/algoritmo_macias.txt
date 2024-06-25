@@ -1,0 +1,46 @@
+use std::io; // Importa el módulo std::io para manejar la entrada y salida estándar
+
+fn main() {
+    println!("Identificador de tipo de triángulo");
+
+    // Solicitar el primer lado del triángulo al usuario
+    println!("Ingrese el primer lado del triángulo:");
+    let lado1 = leer_entrada();
+
+    // Solicitar el segundo lado del triángulo al usuario
+    println!("Ingrese el segundo lado del triángulo:");
+    let lado2 = leer_entrada();
+
+    // Solicitar el tercer lado del triángulo al usuario
+    println!("Ingrese el tercer lado del triángulo:");
+    let lado3 = leer_entrada();
+
+    // Determinar el tipo de triángulo
+    let tipo = determinar_tipo_triangulo(lado1, lado2, lado3);
+
+    // Mostrar el resultado
+    println!(
+        "El triángulo con lados {}, {}, {} es: {}",
+        lado1, lado2, lado3, tipo
+    );
+}
+
+// Función para leer y convertir la entrada del usuario a un número de coma flotante
+fn leer_entrada() -> f64 {
+    let mut entrada = String::new(); // Crear una nueva cadena vacía
+    io::stdin()
+        .read_line(&mut entrada)
+        .expect("Error al leer la entrada"); // Leer la entrada del usuario
+    entrada.trim().parse().expect("Por favor ingrese un número válido") // Convertir la entrada a un número de coma flotante
+}
+
+// Función para determinar el tipo de triángulo
+fn determinar_tipo_triangulo(lado1: f64, lado2: f64, lado3: f64) -> &'static str {
+    if lado1 == lado2 && lado2 == lado3 {
+        "Equilátero"
+    } else if lado1 == lado2 || lado1 == lado3 || lado2 == lado3 {
+        "Isósceles"
+    } else {
+        "Escaleno"
+    }
+}
