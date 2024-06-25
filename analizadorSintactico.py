@@ -14,8 +14,19 @@ def p_empty(p):
     'empty :'
     pass
 
+def p_variable(p):
+    '''variable :  expression
+                | number
+                | logicexpression
+    '''
+
 def p_expresion(p):
     'expresion : number operator number'
+
+
+def p_logicexpresion(p):
+    'logicexpression: value compOperator value'
+
 
 def p_number(p):
     '''number : INTEGER
@@ -50,20 +61,18 @@ def p_println(p):
                 | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
 
 def p_ifStatement(p):
-    'ifStatement : IF value compOperator value LLLAVE cuerpo RLLAVE SEMICOLON'
+    'ifStatement : IF logicexpression LLLAVE cuerpo RLLAVE SEMICOLON'
 
 def p_ifElseStatement(p):
     'ifElseStatement : ifStatement elseStatement'
 
 def p_elseStatement(p):
     '''elseStatement : ELSE LLLAVE cuerpo RLLAVE SEMICOLON
-                     | ELSE IF value compOperator value LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
+                     | ELSE IF logicexpression LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
 
 def p_comment(p):
     'comment :  COMMENT'
 
-def p_variable(p):
-    'variable :  '
 
 
 
