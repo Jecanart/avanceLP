@@ -126,4 +126,5 @@ def logOutput(user, algoritmo):
            
        
 
-logOutput('jecanart', algoritmoCanarte)
+#logOutput('jecanart', algoritmoCanarte)
+logOutput('JoseTorres2210', algoritmoTorres)

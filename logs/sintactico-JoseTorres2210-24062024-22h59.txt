@@ -1,0 +1,65 @@
+use std::io;
+Syntax error in input!
+use std::io::Write;
+Syntax error in input!
+fn main() {
+Syntax error in input!
+// Numero fijo de entradas que el usuario debe proporcionar
+Syntax error in input!
+const NUM_ENTRADAS: usize = 5;
+Syntax error in input!
+// Declaracion de un vector para almacenar los numeros
+Syntax error in input!
+let mut numeros: Vec<i32> = Vec::new();
+Syntax error in input!
+Syntax error in input!
+println!("Introduce {} numeros enteros:", NUM_ENTRADAS);
+Syntax error in input!
+// Leer numeros del usuario
+Syntax error in input!
+for _ in 0..NUM_ENTRADAS {
+Syntax error in input!
+print!("Numero: ");
+Syntax error in input!
+io::stdout().flush().unwrap(); // Asegura que el mensaje se imprima antes de leer la entrada
+Syntax error in input!
+let mut entrada = String::new();
+Syntax error in input!
+io::stdin().read_line(&mut entrada).expect("Error al leer la línea");
+Syntax error in input!
+Illegal character '&'
+let entrada = entrada.trim(); // Elimina espacios en blanco al principio y al final
+Syntax error in input!
+// Intentar convertir la entrada en un numero entero
+Syntax error in input!
+match entrada.parse::<i32>() {
+Syntax error in input!
+Ok(numero) => numeros.push(numero), // Agregar el numero al vector si la conversion es exitosa
+Syntax error in input!
+Err(_) => {
+Syntax error in input!
+println!("Por favor, introduce un numero entero válido.");
+return; // Termina el programa si la entrada no es valida
+Syntax error in input!
+}
+Syntax error in input!
+}
+Syntax error in input!
+}
+Syntax error in input!
+// Calcular la suma y el promedio de los numeros
+Syntax error in input!
+let suma: i32 = numeros.iter().sum();
+Syntax error in input!
+let conteo: usize = numeros.len();
+Syntax error in input!
+let promedio: f64 = suma as f64 / conteo as f64;
+Syntax error in input!
+// Mostrar los resultados
+Syntax error in input!
+println!("Suma: {}", suma);
+Syntax error in input!
+println!("Conteo: {}", conteo);
+Syntax error in input!
+println!("Promedio: {:.2}", promedio);
+Syntax error in input!
