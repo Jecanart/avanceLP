@@ -1,0 +1,148 @@
+use std::io; 
+Syntax error in input!
+None
+
+use std::io::Write;   
+Syntax error in input!
+None
+
+
+None
+
+fn main() {
+Syntax error in input!
+None
+
+    // Numero fijo de entradas que el usuario debe proporcionar 
+None
+
+    const NUM_ENTRADAS: usize = 5; 
+Syntax error in input!
+None
+
+
+None
+
+    // Declaracion de un vector para almacenar los numeros 
+None
+
+    let mut numeros: Vec<i32> = Vec::new(); 
+Syntax error in input!
+None
+
+
+None
+
+    println!("Introduce {} numeros enteros:", NUM_ENTRADAS); 
+Syntax error in input!
+None
+
+
+None
+
+    // Leer numeros del usuario 
+None
+
+    for _ in 0..NUM_ENTRADAS { 
+Syntax error in input!
+None
+
+        print!("Numero: ");
+Syntax error in input!
+None
+
+        io::stdout().flush().unwrap(); // Asegura que el mensaje se imprima antes de leer la entrada
+Syntax error in input!
+None
+
+
+None
+
+        let mut entrada = String::new();
+Syntax error in input!
+None
+
+        io::stdin().read_line(&mut entrada).expect("Error al leer la línea"); 
+Syntax error in input!
+Illegal character '&'
+None
+
+
+None
+
+        let entrada = entrada.trim(); // Elimina espacios en blanco al principio y al final 
+Syntax error in input!
+None
+
+
+None
+
+        // Intentar convertir la entrada en un numero entero 
+None
+
+        match entrada.parse::<i32>() { 
+Syntax error in input!
+None
+
+            Ok(numero) => numeros.push(numero), // Agregar el numero al vector si la conversion es exitosa 
+Syntax error in input!
+None
+
+            Err(_) => { 
+Syntax error in input!
+None
+
+                println!("Por favor, introduce un numero entero válido."); 
+None
+
+                return; // Termina el programa si la entrada no es valida 
+Syntax error in input!
+None
+
+            }
+Syntax error in input!
+None
+
+        }
+Syntax error in input!
+None
+
+    }
+Syntax error in input!
+None
+
+
+None
+
+    // Calcular la suma y el promedio de los numeros 
+None
+
+    let suma: i32 = numeros.iter().sum();
+Syntax error in input!
+None
+
+    let conteo: usize = numeros.len(); 
+Syntax error in input!
+None
+
+    let promedio: f64 = suma as f64 / conteo as f64; 
+Syntax error in input!
+None
+
+
+None
+
+    // Mostrar los resultados 
+None
+
+    println!("Suma: {}", suma); 
+Syntax error in input!
+None
+
+    println!("Conteo: {}", conteo);
+Syntax error in input!
+None
+
+    println!("Promedio: {:.2}", promedio);
+Syntax error in input!
+None
