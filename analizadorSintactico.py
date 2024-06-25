@@ -8,6 +8,7 @@ def p_cuerpo(p):
               | println
               | ifStatement
               | ifElseStatement
+              | variable
               | comment'''
 
 def p_empty(p):
@@ -62,11 +63,14 @@ def p_elseStatement(p):
 def p_comment(p):
     'comment :  COMMENT'
 
+def p_variable(p):
+    'variable :  '
+
 
 
 
 algoritmoCanarte = open ("algoritmos/algoritmo_canarte.txt")
-
+algoritmoTorres = open ("algoritmos/algoritmo_torres.txt")
 
 # Error rule for syntax errors
 def p_error(p):
