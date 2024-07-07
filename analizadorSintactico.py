@@ -4,7 +4,7 @@ from analizadorLexico import tokens, algoritmo_Macias, algoritmo_Torres
 import sys
 
 def p_cuerpo(p):
-    '''cuerpo : expression
+    '''cuerpo : expressions
               | println
               | ifStatement
               | ifElseStatement
@@ -20,18 +20,29 @@ def p_empty(p):
     pass
 
 def p_variable(p):
-    '''variable :  expression
+    '''variable : expression
                 | number
-                | logicexpression
+                | logicExpressions
     '''
 
+def p_expressions(p):
+    '''expressions : expression
+                    | expression operator expressions'''
+
 def p_expression(p):
-    'expression : number operator number'
+    '''expression : value operator value'''
 
 
-def p_logicexpression(p):
-    'logicexpression : value compOperator value'
+def p_logicExpressions(p):
+    '''logicExpressions : logicExpression
+                        | logicExpression lConector logicExpressions'''
+def p_logicExpression(p):
+    'logicExpression : value compOperator value'
 
+def p_lConector(p):
+    '''lConector : AND
+                 | OR
+                 | NOT'''
 
 def p_number(p):
     '''number : INTEGER
@@ -54,8 +65,8 @@ def p_compOperator(p):
 
 def p_value(p):
     '''value : VARIABLE
-            | INTEGER
-            | FLOAT'''
+             | INTEGER
+             | FLOAT'''
     
 def p_values(p):
     '''values : value
@@ -70,14 +81,14 @@ def p_varStatement(p):
                     | LET MUT VARIABLE ASSIGN value SEMICOLON'''
 
 def p_ifStatement(p):
-    'ifStatement : IF logicexpression LLLAVE cuerpo RLLAVE SEMICOLON'
+    'ifStatement : IF logicExpressions LLLAVE cuerpo RLLAVE SEMICOLON'
 
 def p_ifElseStatement(p):
     'ifElseStatement : ifStatement elseStatement'
 
 def p_elseStatement(p):
     '''elseStatement : ELSE LLLAVE cuerpo RLLAVE SEMICOLON
-                     | ELSE IF logicexpression LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
+                     | ELSE IF logicExpressions LLLAVE cuerpo RLLAVE elseStatement SEMICOLON '''
 
 def p_arrayStatementWOType(p):
     'arrayStatement : LET VARIABLE ASSIGN LBRACKET values RBRACKET SEMICOLON'
@@ -127,6 +138,6 @@ def logOutput(user, algoritmo):
            
        
 
-#logOutput('jecanart', algoritmoCanarte)
+logOutput('jecanart', algoritmoCanarte)
 #logOutput('JoseTorres2210', algoritmoTorres)
-logOutput('Ghost04102002', algoritmoMacias)
+#logOutput('Ghost04102002', algoritmoMacias)

@@ -119,7 +119,7 @@ t_DIVIDE_ASSIGN  = r'\/='
 t_MOD_ASSIGN     = r'%='
 
 # Operadores lógicos
-t_AND      = r'&&'
+t_AND      = r'\&\&'
 t_OR       = r'\|\|'
 t_NOT      = r'!'
 
