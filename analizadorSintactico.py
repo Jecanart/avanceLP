@@ -121,6 +121,8 @@ def p_value(p):
              | INTEGER
              | FLOAT
              | STRING
+             | BOOL
+             | STRING
              | BOLL'''
     if isinstance(p[1], str) and p[1] in variables:
         p[0] = variables[p[1]]
