@@ -1,0 +1,10 @@
+a + b
+Semantic error, variable a has not been initialized
+let a = 4;
+let b = "5";
+b + a
+Semantic error, uncompatible type bool
+let mut c = 2;
+c + b
+Semantic error, uncompatible type bool
+a + c

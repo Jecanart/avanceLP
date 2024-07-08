@@ -1,0 +1,9 @@
+a + b
+Semantic error, variable a has not been initialized
+let a = 3;
+a + b
+Semantic error, variable b has not been initialized
+let b = "4";
+a + b
+let c = 5;
+c + a

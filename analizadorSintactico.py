@@ -75,15 +75,15 @@ def p_expression(p):
         if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
             pass
         else: 
-            print(f"Semantic error, uncompatible type {type(p[1]).__name__}")
+            print(f"Semantic error, uncompatible type: {type(p[1]).__name__}")
     else:
         print(f"Semantic error, variable {p[1]} has not been initialized")
         return
     if not isinstance(p[3], str) or p[3] in variables:
-        if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
+        if type(p[3]).__name__ == "int" or type(p[3]).__name__ == "float":
             pass
         else: 
-            print(f"Semantic error, uncompatible type {type(p[3]).__name__}")
+            print(f"Semantic error, uncompatible type: {type(p[3]).__name__}")
     else:
         print(f"Semantic error, variable {p[3]} has not been initialized")
 
@@ -163,15 +163,25 @@ def logOutput(user, algoritmo):
         result = parser.parse(s)
     sys.stdout.close()
            
-while True:
-    try:
-        s = input('')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+def logOutputSemantic(user):
+    datime = datetime.now()
+    timeStamp = datime.strftime("%d%m%Y-%Hh%M")
+    dirString = "logs/semantic-"+user+"-"+timeStamp+".txt"
+    sys.stdout = open(dirString, 'w')
+    while True:
+        try:
+            s = input('')
+        except EOFError:
+            break
+        if not s: continue
+        if (s == "quit"):
+            break
+        print(s)
+        result = parser.parse(s)
+    sys.stdout.close()
 
 #logOutput('jecanart', algoritmoCanarte)
 #logOutput('JoseTorres2210', algoritmoTorres)
 #logOutput('Ghost04102002', algoritmoMacias)
+
+logOutputSemantic('jecanart')

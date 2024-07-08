@@ -1,0 +1,15 @@
+let a = "2";
+let b = 3
+Syntax error in input!
+let c = 4;
+a + b
+Semantic error, uncompatible type of True: bool
+Semantic error, variable b has not been initialized
+c + a
+Semantic error, uncompatible type of True: bool
+let d = 3;
+c + b
+Semantic error, variable b has not been initialized
+c + s
+Semantic error, variable s has not been initialized
+c + d
