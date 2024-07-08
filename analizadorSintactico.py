@@ -13,6 +13,9 @@ def p_cuerpo(p):
     '''cuerpo : expression
               | logicExpression   
               | println
+              | tuple
+              | linkedlist
+              | vector
               | ifStatement
               | ifElseStatement
               | varStatement
@@ -26,6 +29,47 @@ def p_cuerpo(p):
 def p_println(p):
     '''println : PRINTLN NOT LPAREN RPAREN SEMICOLON
                 | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
+
+def p_tuple(p):
+    'tuple : LPAREN values RPAREN'
+    p[0] = tuple(p[2])
+
+def p_linkedlist(p):
+    '''linkedlist : LPAREN value linkedlist_tail RPAREN'''
+    if p[3] is None:
+        p[0] = (p[2],)
+    else:
+        p[0] = (p[2], p[3])
+
+def p_linkedlist_tail(p):
+    '''linkedlist_tail : COMMA value linkedlist_tail
+                       | emptyString'''
+    if len(p) == 2:
+        p[0] = None
+    else:
+        if p[3] is None:
+            p[0] = (p[2],)
+        else:
+            p[0] = (p[2], p[3])
+
+def p_vector(p):
+    '''vector : LBRACKET elements RBRACKET'''
+    p[0] = p[2]
+
+def p_elements(p):
+    '''elements : element
+                | element COMMA elements'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
+
+def p_element(p):
+    '''element : INTEGER
+               | FLOAT
+               | STRING
+               | vector'''
+    p[0] = p[1]
 
 def p_varStatement(p):
     '''varStatement : LET VARIABLE ASSIGN value SEMICOLON
@@ -253,4 +297,4 @@ def logOutputSemantic(user):
 #logOutput('JoseTorres2210', algoritmoTorres)
 #logOutput('Ghost04102002', algoritmoMacias)
 
-logOutputSemantic('JoseTorres2210')
+logOutputSemantic('Ghost04102002')
