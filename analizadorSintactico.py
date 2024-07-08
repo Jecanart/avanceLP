@@ -72,8 +72,7 @@ def p_expressions(p):
 def p_expression(p):
     '''expression : value operator value'''
     if not isinstance(p[1], str) or p[1] in variables:
-        if isinstance(p[1], (int, float)):
-            print(type(p[1]).__name__)
+        if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
             pass
         else: 
             print(f"Semantic error, uncompatible type {type(p[1]).__name__}")
@@ -81,8 +80,7 @@ def p_expression(p):
         print(f"Semantic error, variable {p[1]} has not been initialized")
         return
     if not isinstance(p[3], str) or p[3] in variables:
-        if isinstance(p[3], (int, float)):
-            print(type(p[3]).__name__)
+        if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
             pass
         else: 
             print(f"Semantic error, uncompatible type {type(p[3]).__name__}")
