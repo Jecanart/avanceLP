@@ -1,0 +1,15 @@
+let x = 2 ;
+x = 3 ; 
+Semantic error: Variable 'x' is not mutable
+let mut y = 5 ;
+y = 8 ; 
+let a = "2";
+let b = 3
+Syntax error in input!
+let c = 4;
+a + b
+Semantic error, incompatible type: bool or str
+c + d
+Semantic error, incompatible type: int or str
+c + s
+Semantic error, incompatible type: int or str

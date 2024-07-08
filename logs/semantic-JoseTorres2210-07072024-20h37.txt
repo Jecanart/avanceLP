@@ -1,0 +1,11 @@
+a + b
+Semantic error, variable a has not been initialized
+let a = 2 ;
+let b = 3 ;
+a + b
+a = 1 ;
+Semantic error: Variable 'a' is not mutable
+let mut c = 5 ;
+c = 7 ;
+let d = "hola" ;
+a + d

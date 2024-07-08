@@ -1,0 +1,10 @@
+let x = 2 ;
+let y = 1 ;
+x + y
+x + w 
+Semantic error, incompatible type: int or str
+let mut z = 2;
+z = 3;
+Syntax error in input!
+z = 3 ;
+Syntax error in input!

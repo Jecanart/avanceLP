@@ -7,12 +7,15 @@ variables = {
 
 }
 
+mutables = {}
+
 def p_cuerpo(p):
     '''cuerpo : expression
               | println
               | ifStatement
               | ifElseStatement
               | varStatement
+              | assignmentStatement
               | variable
               | emptyString
               | arrayStatement
@@ -27,9 +30,27 @@ def p_varStatement(p):
     '''varStatement : LET VARIABLE ASSIGN value SEMICOLON
                     | LET MUT VARIABLE ASSIGN value SEMICOLON'''
     if len(p) == 6:
-        variables[p[2]] = p[4]
+        if p[2] in variables:
+            print(f"Semantic error: Variable '{p[2]}' is already initialized")
+        else:
+            variables[p[2]] = p[4]
+            mutables[p[2]] = False
     elif len(p) == 7:
-        variables[p[3]] = p[5]
+        if p[3] in variables:
+            print(f"Semantic error: Variable '{p[3]}' is already initialized")
+        else:
+            variables[p[3]] = p[5]
+            mutables[p[3]] = True
+
+def p_assignmentStatement(p):
+    '''assignmentStatement : VARIABLE ASSIGN value SEMICOLON'''
+    if p[1] in variables:
+        if mutables[p[1]]:
+            variables[p[1]] = p[3]
+        else:
+            print(f"Semantic error: Variable '{p[1]}' is not mutable")
+    else:
+        print(f"Semantic error: Variable '{p[1]}' is not initialized")
 
 def p_ifStatement(p):
     'ifStatement : IF logicExpressions LLLAVE cuerpo RLLAVE SEMICOLON'
@@ -43,11 +64,27 @@ def p_elseStatement(p):
 
 def p_arrayStatementWOType(p):
     'arrayStatement : LET VARIABLE ASSIGN LBRACKET values RBRACKET SEMICOLON'
-    variables[p[2]] = p[5]
+    if p[2] in variables:
+        print(f"Semantic error: Variable '{p[2]}' is already initialized")
+    else:
+        variables[p[2]] = p[5]
+        mutables[p[2]] = False
 
 def p_emptyString(p):
     '''emptyString : LET VARIABLE ASSIGN SEMICOLON SEMICOLON NEW LPAREN RPAREN SEMICOLON
                    | LET MUT VARIABLE ASSIGN SEMICOLON SEMICOLON NEW LPAREN RPAREN SEMICOLON'''
+    if len(p) == 10:
+        if p[2] in variables:
+            print(f"Semantic error: Variable '{p[2]}' is already initialized")
+        else:
+            variables[p[2]] = ""
+            mutables[p[2]] = False
+    elif len(p) == 11:
+        if p[3] in variables:
+            print(f"Semantic error: Variable '{p[3]}' is already initialized")
+        else:
+            variables[p[3]] = ""
+            mutables[p[3]] = True
 
 def p_emptyFunctionSt(p):
     'emptyFunctionSt : FN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
@@ -71,22 +108,32 @@ def p_expressions(p):
 
 def p_expression(p):
     '''expression : value operator value'''
-    if not isinstance(p[1], str) or p[1] in variables:
-        if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
-            pass
-        else: 
-            print(f"Semantic error, uncompatible type: {type(p[1]).__name__}")
-    else:
+    # Verificar si las variables están inicializadas
+    if isinstance(p[1], str) and p[1] not in variables:
         print(f"Semantic error, variable {p[1]} has not been initialized")
         return
-    if not isinstance(p[3], str) or p[3] in variables:
-        if type(p[3]).__name__ == "int" or type(p[3]).__name__ == "float":
-            pass
-        else: 
-            print(f"Semantic error, uncompatible type: {type(p[3]).__name__}")
-    else:
+    if isinstance(p[3], str) and p[3] not in variables:
         print(f"Semantic error, variable {p[3]} has not been initialized")
+        return
 
+    # Obtener los valores de las variables si están inicializadas
+    if isinstance(p[1], str):
+        p[1] = variables[p[1]]
+    if isinstance(p[3], str):
+        p[3] = variables[p[3]]
+
+    # Verificar tipos de datos
+    if type(p[1]).__name__ == "int" or type(p[1]).__name__ == "float":
+        pass
+    else: 
+        print(f"Semantic error, uncompatible type: {type(p[1]).__name__}")
+        return
+
+    if type(p[3]).__name__ == "int" or type(p[3]).__name__ == "float":
+        pass
+    else: 
+        print(f"Semantic error, uncompatible type: {type(p[3]).__name__}")
+        return
 
 def p_logicExpressions(p):
     '''logicExpressions : logicExpression
@@ -184,4 +231,4 @@ def logOutputSemantic(user):
 #logOutput('JoseTorres2210', algoritmoTorres)
 #logOutput('Ghost04102002', algoritmoMacias)
 
-logOutputSemantic('jecanart')
+logOutputSemantic('JoseTorres2210')
