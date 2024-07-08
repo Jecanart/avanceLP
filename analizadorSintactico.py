@@ -8,7 +8,7 @@ variables = {
 }
 
 def p_cuerpo(p):
-    '''cuerpo : expressions
+    '''cuerpo : expression
               | println
               | ifStatement
               | ifElseStatement
@@ -43,6 +43,7 @@ def p_elseStatement(p):
 
 def p_arrayStatementWOType(p):
     'arrayStatement : LET VARIABLE ASSIGN LBRACKET values RBRACKET SEMICOLON'
+    variables[p[2]] = p[5]
 
 def p_emptyString(p):
     '''emptyString : LET VARIABLE ASSIGN SEMICOLON SEMICOLON NEW LPAREN RPAREN SEMICOLON
@@ -71,12 +72,20 @@ def p_expressions(p):
 def p_expression(p):
     '''expression : value operator value'''
     if not isinstance(p[1], str) or p[1] in variables:
-        pass
+        if isinstance(p[1], (int, float)):
+            print(type(p[1]).__name__)
+            pass
+        else: 
+            print(f"Semantic error, uncompatible type {type(p[1]).__name__}")
     else:
         print(f"Semantic error, variable {p[1]} has not been initialized")
         return
     if not isinstance(p[3], str) or p[3] in variables:
-        pass
+        if isinstance(p[3], (int, float)):
+            print(type(p[3]).__name__)
+            pass
+        else: 
+            print(f"Semantic error, uncompatible type {type(p[3]).__name__}")
     else:
         print(f"Semantic error, variable {p[3]} has not been initialized")
 
@@ -119,6 +128,10 @@ def p_value(p):
 def p_values(p):
     '''values : value
             | value COMMA values'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[3]
 
 
 algoritmoCanarte = open ("algoritmos/algoritmo_canarte.txt")
