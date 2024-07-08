@@ -119,7 +119,9 @@ def p_compOperator(p):
 def p_value(p):
     '''value : VARIABLE
              | INTEGER
-             | FLOAT'''
+             | FLOAT
+             | STRING
+             | BOLL'''
     if isinstance(p[1], str) and p[1] in variables:
         p[0] = variables[p[1]]
     else:
