@@ -11,6 +11,7 @@ mutables = {}
 
 def p_cuerpo(p):
     '''cuerpo : expression
+              | logicExpression   
               | println
               | ifStatement
               | ifElseStatement
@@ -138,8 +139,29 @@ def p_expression(p):
 def p_logicExpressions(p):
     '''logicExpressions : logicExpression
                         | logicExpression lConector logicExpressions'''
+    
 def p_logicExpression(p):
     'logicExpression : value compOperator value'
+    # Verificar si las variables están inicializadas
+    if isinstance(p[1], str) and p[1] not in variables:
+        print(f"Semantic error, variable {p[1]} has not been initialized")
+        return
+    if isinstance(p[3], str) and p[3] not in variables:
+        print(f"Semantic error, variable {p[3]} has not been initialized")
+        return
+
+    # Obtener los valores de las variables si están inicializadas
+    if isinstance(p[1], str):
+        p[1] = variables[p[1]]
+    if isinstance(p[3], str):
+        p[3] = variables[p[3]]
+
+    # Verificar tipos de datos
+    if type(p[1]) == type(p[3]):
+        pass
+    else: 
+        print(f"Semantic error, uncompatible types: {type(p[1]).__name__} and {type(p[3]).__name__}")
+        return
 
 def p_lConector(p):
     '''lConector : AND

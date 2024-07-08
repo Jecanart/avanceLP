@@ -1,0 +1,8 @@
+a == b
+Semantic error, variable a has not been initialized
+let a = 2 ;
+let b = "hola" ;
+a == b
+Semantic error, uncompatible types: int and bool
+let c = 0 ;
+a > c
