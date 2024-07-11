@@ -20,6 +20,7 @@ def p_statement(p):
     '''statement : expression SEMICOLON
                  | logicExpression SEMICOLON
                  | println
+                 | printlnArgs
                  | tuple
                  | linkedlist
                  | vector
@@ -34,11 +35,19 @@ def p_statement(p):
                  | arrayStatement
                  | emptyString
                  | emptyFunctionSt
-                 | voidFunctionSt'''
+                 | voidFunctionSt
+                 | voidArgsFunctionSt
+                 | funCall'''
 
 def p_println(p):
     '''println : PRINTLN NOT LPAREN RPAREN SEMICOLON
                | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
+
+def p_printlnArgs(p):
+    'printlnArgs : PRINTLN NOT LPAREN STRING COMMA argsVar RPAREN SEMICOLON'
+    
+def p_funCall(p):
+    'funCall : VARIABLE LPAREN argsVar RPAREN SEMICOLON'
 
 def p_breakStatement(p):
     '''breakStatement : BREAK SEMICOLON'''
@@ -172,13 +181,31 @@ def p_emptyFunctionSt(p):
 def p_voidFunctionSt(p):
     'voidFunctionSt : FN VARIABLE LPAREN RPAREN LLLAVE statements RLLAVE'
 
+def p_voidArgsFunctionSt(p):
+    'voidArgsFunctionSt : FN VARIABLE LPAREN arguments RPAREN LLLAVE statements RLLAVE'
+
+def p_arguments(p):
+    '''arguments : argument
+                 | argument COMMA arguments'''
+
+def p_argument(p):
+    'argument : VARIABLE COLON dataType'
+
+
 def p_empty(p):
     'empty :'
     pass
 
+def p_argsVar(p):
+    '''argsVar : variable
+               | variable COMMA argsVar'''
+
 def p_variable(p):
     '''variable : VARIABLE'''
-
+    if isinstance(p[1], str) and p[1] not in variables:
+        syntactic_errors.append(f"Semantic error, variable {p[1]} has not been initialized at line {p.lineno(1)}")
+        return
+    
 def p_expressions(p):
     '''expressions : expression
                    | expression operator expressions'''
@@ -253,7 +280,7 @@ def p_value(p):
              | INTEGER
              | FLOAT
              | STRING
-             | BOOL'''
+             | BOOLEAN'''
     if isinstance(p[1], str) and p[1] in variables:
         p[0] = variables[p[1]]
     else:
@@ -266,6 +293,22 @@ def p_values(p):
         p[0] = [p[1]]
     else:
         p[0] = [p[1]] + p[3]
+
+def p_dataType(p):
+    '''dataType : I8
+                | I16
+                | I32
+                | I64
+                | I128
+                | U8
+                | U16
+                | U32
+                | U64
+                | U128
+                | F32
+                | F64
+                | T_CHAR
+                | BOOL'''
 
 def p_error(p):
     if p:

@@ -39,7 +39,7 @@ def analyze_code():
         if lexical_errors:
             error_output.insert("1.0", "Errores Léxicos:\n" + "\n".join(lexical_errors) + "\n")
         if syntactic_errors:
-            error_output.insert("1.0", "Errores Sintácticos:\n" + "\n".join(syntactic_errors)+ "\n")
+            error_output.insert("1.0", "Errores Semánticos:\n" + "\n".join(syntactic_errors)+ "\n")
     else:
         error_output.insert("1.0", "No se han detectado problemas\n")
 

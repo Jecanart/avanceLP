@@ -10,11 +10,14 @@ reserved = {
     "self": "SELF", "static": "STATIC", "struct": "STRUCT", "super": "SUPER",
     "trait": "TRAIT", "true": "TRUE", "type": "TYPE", "unsafe": "UNSAFE",
     "use": "USE", "where": "WHERE", "while": "WHILE", "string": "STRING",
-    "println": "PRINTLN", "linkedlist": "LINKEDLIST", "vec": "VEC", "new": "NEW"
+    "println": "PRINTLN", "linkedlist": "LINKEDLIST", "vec": "VEC", "new": "NEW",
+    'i8': 'I8', 'i16': 'I16', 'i32': 'I32', 'i64': 'I64', 'i128': 'I128', 'u8': 'U8',
+    'u16': 'U16', 'u32': 'U32', 'u64': 'U64', 'u128': 'U128', 'f32': 'F32', 'f64': 'F64',
+    'char' : 'T_CHAR', 'bool' : 'BOOL' 
 }
 
 tokens = (
-    "VARIABLE", "FLOAT", "INTEGER", "CHAR", "BOOL", "CPOINTER", "REFERENCE",
+    "VARIABLE", "FLOAT", "INTEGER", "CHAR", "BOOLEAN", "CPOINTER", "REFERENCE",
     'NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'LLLAVE', 'RLLAVE',
     'LBRACKET', 'RBRACKET', 'RPAREN', 'MOD', 'COMMA', 'SEMICOLON', 'PERIOD',
     'COLON', 'EQUALS', 'NOT_EQUALS', 'LESSER', 'GREATER', 'LESSER_EQ',
@@ -78,7 +81,7 @@ def t_INTEGER(t):
     t.value = int(t.value)
     return t
 
-def t_BOOL(t):
+def t_BOOLEAN(t):
     r'(true|false)'
     t.value = bool(t.value)
     return t
