@@ -5,6 +5,9 @@ variables = {}
 mutables = {}
 syntactic_errors = []
 
+loop_stack = []
+valid_iterable_types = {'vector', 'linkedlist', 'range'}
+
 # Regla principal
 def p_program(p):
     '''program : statements'''
@@ -20,6 +23,9 @@ def p_statement(p):
                  | tuple
                  | linkedlist
                  | vector
+                 | breakStatement
+                 | forLoop
+                 | whileLoop
                  | ifStatement
                  | ifElseStatement
                  | varStatement
@@ -34,9 +40,36 @@ def p_println(p):
     '''println : PRINTLN NOT LPAREN RPAREN SEMICOLON
                | PRINTLN NOT LPAREN STRING RPAREN SEMICOLON'''
 
+def p_breakStatement(p):
+    '''breakStatement : BREAK SEMICOLON'''
+    if not loop_stack:
+        syntactic_errors.append(f"Error semántico: 'break' fuera de un bucle en línea {p.lineno(1)}")
+
+def p_forLoop(p):
+    '''forLoop : FOR VARIABLE IN expression LLLAVE statements RLLAVE'''
+    if not is_valid_iterable(p[4]):
+        syntactic_errors.append(f"Error semántico: La expresión en 'for' no es una colección o rango válido en línea {p.lineno(3)}")
+    loop_stack.append('for')
+    p[0] = ('for', p[2], p[4], p[6])
+    loop_stack.pop()
+
+def is_valid_iterable(expression):
+    if isinstance(expression, str) and expression in variables:
+        var_type = variables[expression][0]
+        return var_type in valid_iterable_types
+    elif isinstance(expression, (list, range)):
+        return True
+    return False
+
+def p_whileLoop(p):
+    '''whileLoop : WHILE logicExpressions LLLAVE statements RLLAVE'''
+    loop_stack.append('while')
+    p[0] = ('while', p[2], p[4])
+    loop_stack.pop()
+
 def p_tuple(p):
-    'tuple : LPAREN values RPAREN'
-    p[0] = tuple(p[2])
+    'tuple : LET VARIABLE ASSIGN LPAREN values RPAREN SEMICOLON'
+    p[0] = (p[2], tuple(p[5]))
 
 def p_linkedlist(p):
     '''linkedlist : LPAREN value linkedlist_tail RPAREN'''
@@ -57,8 +90,12 @@ def p_linkedlist_tail(p):
             p[0] = (p[2], p[3])
 
 def p_vector(p):
-    '''vector : LBRACKET elements RBRACKET'''
-    p[0] = p[2]
+    '''vector : LET VARIABLE COLON VEC LESSER TYPE GREATER ASSIGN VEC NOT LPAREN elements RPAREN SEMICOLON
+              | LET VARIABLE ASSIGN VEC NOT LBRACKET elements RBRACKET SEMICOLON'''
+    if len(p) == 15:
+        p[0] = (p[2], p[12])
+    elif len(p) == 12:
+        p[0] = (p[2], p[7])
 
 def p_elements(p):
     '''elements : element
@@ -66,6 +103,8 @@ def p_elements(p):
     if len(p) == 2:
         p[0] = [p[1]]
     else:
+        if type(p[1]) != type(p[3][0]):
+            raise SyntaxError(f"Error de tipo: Elementos de diferentes tipos en vector en línea {p.lineno(1)}")
         p[0] = [p[1]] + p[3]
 
 def p_element(p):

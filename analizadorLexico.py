@@ -10,7 +10,7 @@ reserved = {
     "self": "SELF", "static": "STATIC", "struct": "STRUCT", "super": "SUPER",
     "trait": "TRAIT", "true": "TRUE", "type": "TYPE", "unsafe": "UNSAFE",
     "use": "USE", "where": "WHERE", "while": "WHILE", "string": "STRING",
-    "println": "PRINTLN", "new": "NEW"
+    "println": "PRINTLN", "linkedlist": "LINKEDLIST", "vec": "VEC", "new": "NEW"
 }
 
 tokens = (
