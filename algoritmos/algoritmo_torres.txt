@@ -1,81 +1,22 @@
-use std::io; 
+fn main() {
+    // Variable no mutable
+    let start = 1;
+    let end = 10;
 
-use std::io::Write; 
+    // Variables mutables
+    let mut sum_even = 0;
+    let mut sum_odd = 0;
 
-  
+    // Iterar sobre el rango y sumar los números pares e impares
+    while number in start<=end {
+        if number % 2 == 0 {
+            sum_even += number;
+        } else {
+            sum_odd += number;
+        }
+    }
 
-fn main() { 
-
-    // Numero fijo de entradas que el usuario debe proporcionar 
-
-    const NUM_ENTRADAS: usize = 5; 
-
-  
-
-    // Declaracion de un vector para almacenar los numeros 
-
-    let mut numeros: Vec<i32> = Vec::new(); 
-
-  
-
-    println!("Introduce {} numeros enteros:", NUM_ENTRADAS); 
-
-  
-
-    // Leer numeros del usuario 
-
-    for _ in 0..NUM_ENTRADAS { 
-
-        print!("Numero: "); 
-
-        io::stdout().flush().unwrap(); // Asegura que el mensaje se imprima antes de leer la entrada 
-
-  
-
-        let mut entrada = String::new(); 
-
-        io::stdin().read_line(&mut entrada).expect("Error al leer la línea"); 
-
-  
-
-        let entrada = entrada.trim(); // Elimina espacios en blanco al principio y al final 
-
-  
-
-        // Intentar convertir la entrada en un numero entero 
-
-        match entrada.parse::<i32>() { 
-
-            Ok(numero) => numeros.push(numero), // Agregar el numero al vector si la conversion es exitosa 
-
-            Err(_) => { 
-
-                println!("Por favor, introduce un numero entero válido."); 
-
-                return; // Termina el programa si la entrada no es valida 
-
-            } 
-
-        } 
-
-    } 
-
-  
-
-    // Calcular la suma y el promedio de los numeros 
-
-    let suma: i32 = numeros.iter().sum(); 
-
-    let conteo: usize = numeros.len(); 
-
-    let promedio: f64 = suma as f64 / conteo as f64; 
-
-  
-
-    // Mostrar los resultados 
-
-    println!("Suma: {}", suma); 
-
-    println!("Conteo: {}", conteo); 
-
-    println!("Promedio: {:.2}", promedio); 
+    // Imprimir los resultados
+    println!("La suma de los números pares entre {} y {} es: {}");
+    println!("La suma de los números impares entre {} y {} es: {}");
+}
