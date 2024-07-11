@@ -100,6 +100,9 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+def t_eof(t):
+    t.lexer.lineno = 1
+
 t_ignore = ' \t'
 
 def t_error(t):

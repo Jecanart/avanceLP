@@ -77,7 +77,9 @@ def p_element(p):
 
 def p_varStatement(p):
     '''varStatement : LET VARIABLE ASSIGN value SEMICOLON
-                    | LET MUT VARIABLE ASSIGN value SEMICOLON'''
+                    | LET MUT VARIABLE ASSIGN value SEMICOLON
+                    | LET VARIABLE ASSIGN expressions SEMICOLON
+                    | LET MUT VARIABLE ASSIGN expressions SEMICOLON'''
     if len(p) == 6:
         if p[2] in variables:
             syntactic_errors.append(f"Semantic error: Variable '{p[2]}' is already initialized at line {p.lineno(2)}")

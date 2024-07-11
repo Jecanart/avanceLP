@@ -14,8 +14,10 @@ def analyze_code():
     lexical_errors.clear()
     syntactic_errors.clear()
     
+    
     # Análisis léxico
     lexer.input(code)
+    lexer.lineo = 1
 
     #Mostrar Tokens
     error_output.delete("1.0", "end")
