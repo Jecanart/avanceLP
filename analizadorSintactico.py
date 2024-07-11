@@ -72,22 +72,12 @@ def p_tuple(p):
     p[0] = (p[2], tuple(p[5]))
 
 def p_linkedlist(p):
-    '''linkedlist : LPAREN value linkedlist_tail RPAREN'''
-    if p[3] is None:
-        p[0] = (p[2],)
-    else:
-        p[0] = (p[2], p[3])
-
-def p_linkedlist_tail(p):
-    '''linkedlist_tail : COMMA value linkedlist_tail
-                       | empty'''
-    if len(p) == 2:
-        p[0] = None
-    else:
-        if p[3] is None:
-            p[0] = (p[2],)
-        else:
-            p[0] = (p[2], p[3])
+    '''linkedlist : LET VARIABLE COLON LINKEDLIST LESSER VARIABLE GREATER ASSIGN LINKEDLIST COLON COLON NEW LPAREN RPAREN SEMICOLON
+                  | LET MUT VARIABLE COLON LINKEDLIST LESSER VARIABLE GREATER ASSIGN LINKEDLIST COLON COLON NEW LPAREN RPAREN SEMICOLON'''
+    var_name = p[2] if p[2] != "mut" else p[3]
+    variables[var_name] = ('linkedlist', [])
+    mutables[var_name] = (p[2] == "mut")
+    p[0] = (var_name, [])
 
 def p_vector(p):
     '''vector : LET VARIABLE COLON VEC LESSER TYPE GREATER ASSIGN VEC NOT LPAREN elements RPAREN SEMICOLON
